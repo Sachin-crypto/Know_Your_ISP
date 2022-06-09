@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+    <meta content="" name="description"/>
+    <meta content="" name="author"/>
+    <title>Know Your ISP - Find your Internet Service Provider</title>
+    <!-- Favicon-->
+    <link href="{{url_for('static', filename='assets/favicon.ico')}}" rel="icon" type="image/x-icon"/>
+    <!-- Font Awesome icons (free version)-->
+    <script crossorigin="anonymous" src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
+          type="text/css"/>
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <!-- Bootstrap CSS -->
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet">
+    <link href="{{url_for('static', filename='css/styles.css')}}" rel="stylesheet"/>
+
+</head>
+<body id="page-top">
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg bg-secondary fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand" href="#page-top">knowyourISP</a>
+        <button aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation"
+                class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded"
+                data-bs-target="#navbarResponsive"
+                data-bs-toggle="collapse" type="button">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded">Your IP:
+                    {{ip}}</a>
+                </li>
+                <li class="nav-item mx-0 mx-lg-1 py-3">
+                    {% if status=="Protected" %}
+                    <span class="badge rounded-pill bg-success">{{status}}</span>
+                    {% else %}
+                    <span class="badge rounded-pill bg-danger">{{status}}</span>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Masthead-->
+<header class="masthead bg-primary text-white text-center">
+    <div class="container d-flex align-items-center flex-column">
+        <h3 class=" mb-4">Your ISP is</h3>
+        <!-- Masthead Heading-->
+        <h1 class="masthead-heading text-uppercase mb-0">{{ yourISP }}</h1>
+        <!-- Icon Divider-->
+        <div class="divider-custom divider-light">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- Masthead Subheading-->
+        <div class="p-4">
+            <p class="masthead-subheading font-weight-light mb-0">Your IP</p>
+            <h1 class=" mb-4">{{ip}}</h1>
+        </div>
+
+        <div class="d-flex flex-column flex-lg-row justify-content-lg-center panel">
+            <div class="p-4">
+                <p class="masthead-subheading font-weight-light mb-0">City</p>
+                <h1 class=" mb-4">{{city}}</h1>
+            </div>
+            <div class="p-4">
+                <p class="masthead-subheading font-weight-light mb-0">Region</p>
+                <h1 class=" mb-4">{{region}}</h1>
+            </div>
+            <!-- Country-->
+            <div class="p-4">
+                <p class="masthead-subheading font-weight-light mb-0">Country</p>
+                <h1 class=" mb-4">{{country}}</h1>
+            </div>
+        </div>
+
+        <p class="masthead-subheading font-weight-light mb-0">Approximate Location</p>
+        <img alt="Your ISP location" class="img-fluid rounded mt-3" src={{location}}>
+        <div class="divider-custom divider-light">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+
+        <p class="masthead-subheading font-weight-light mb-2">Search for other ISPs</p>
+        <p class="mb-3">Want to know ISP and location of other IP, then enter the IP below</p>
+        <div class="d-flex flex-column flex-lg-row justify-content-lg-center panel">
+            <div class="input-group">
+                <input aria-describedby="search-addon" aria-label="Search" class="form-control" placeholder={{ip}}
+                       type="search"/>
+                <button class="btn btn-outline-primary" type="button"><i class="fa fa-search"></i> Find ISP</button>
+            </div>
+        </div>
+        <p class="masthead-subheading font-weight-light mb-3 mt-5">Share your Report</p>
+        <div class="d-flex flex-column flex-lg-row justify-content-lg-center panel">
+            <div class="input-group">
+                <input aria-describedby="search-addon" aria-label="Search" class="form-control" placeholder={{ip}}
+                       type="search"/>
+                <button class="btn btn-outline-primary" type="button"><i class="fa fa-clipboard"></i> Copy link</button>
+            </div>
+        </div>
+    </div>
+
+
+</header>
+
+<!-- About Section Content-->
+<section class="bg-primary text-white mb-0">
+    <div class="container">
+        <!-- About Section Content-->
+        <div class="row">
+            <div class="col-lg-4 ms-auto"><p class="h5 link-primary">What is an ISP?</p>
+                <p class="lead">ISP stands for <b>Internet Service Provider</b>. An Internet service provider (ISP) is
+                    an organization that provides services for accessing, using, or participating in the Internet.</p>
+            </div>
+            <div class="col-lg-4 me-auto"><p class="h5 link-primary">IP address</p>
+                <p class="lead">Your external IP address is {{ip}} which is an unique address that is used to identify
+                    your internet connection.</p></div>
+            <div class="col-lg-4 me-auto"><p class="h5 link-primary">You're {{status}}</p>
+                <p class="lead">Your data is vulnerable and you could be spied on by hackers or worse
+                    you could get hacked. So protect yourself by using a VPN.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer-->
+<footer class="footer text-center">
+    <div class="container">
+        <div class="row">
+            <!-- Footer Social Icons-->
+            <div class="col-lg-4 mb-5 mb-lg-0">
+                <h4 class="text-uppercase mb-4">Around the Web</h4>
+                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-facebook-f"></i></a>
+                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-twitter"></i></a>
+                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-linkedin-in"></i></a>
+                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-dribbble"></i></a>
+            </div>
+            <!-- Footer About Text-->
+            <div class="col-lg-4">
+                <h4 class="text-uppercase mb-4">About Freelancer</h4>
+                <p class="lead mb-0">
+                    Freelance is a free to use, MIT licensed Bootstrap theme created by
+                    <a href="http://startbootstrap.com">Start Bootstrap</a>
+                    .
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Copyright Section-->
+<div class="copyright py-4 text-center text-white">
+    <div class="container"><small>Copyright &copy; knowyourISP 2021</small></div>
+</div>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="{{url_for('static', filename='js/scripts.js')}}"></script>
+<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+
+
+
+
+
+</script>
+</body>
+</html>
