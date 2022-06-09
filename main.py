@@ -1,10 +1,11 @@
 from flask import Flask, render_template
 import ipinfo
 import subprocess
+import os
 
 app = Flask(__name__)
 
-access_token = '11fac9d051d048'
+access_token = os.getenv("ACCESS_TOKEN")
 
 
 @app.route("/")
