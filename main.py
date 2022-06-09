@@ -6,6 +6,7 @@ import os
 app = Flask(__name__)
 
 access_token = os.getenv("ACCESS_TOKEN")
+map_img_token = os.getenv("STATIC_MAP_IMG")
 
 
 @app.route("/")
@@ -34,7 +35,7 @@ def main():
     showIP = showIP()
 
     def showlanglong():
-        return f"https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-l+ff0000({details.longitude},{details.latitude})/{details.longitude},{details.latitude},05.90,20,60/1000x400?access_token=pk.eyJ1Ijoic2FjaGlucHlyZXgiLCJhIjoiY2wydWg2N2ttMDIxazNqampscGhzdnlodiJ9.1uQYyo2gOQMWNOvtYJH_gA"
+        return f"https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-l+ff0000({details.longitude},{details.latitude})/{details.longitude},{details.latitude},05.90,20,60/1000x400?access_token={map_img_token}"
 
     langlong = showlanglong()
 
@@ -43,6 +44,7 @@ def main():
 
     showregion = showISPregion()
 
+    # To check whether the VPN is connected or not
     def showStatus():
         host = details.ip
         ping = subprocess.Popen(["ping.exe", "-n", "1", "-w", "1", host], stdout=subprocess.PIPE).communicate()[0]
