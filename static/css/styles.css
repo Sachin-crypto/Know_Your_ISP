@@ -41,15 +41,15 @@
   --bs-danger: #dc3545;
   --bs-light: #f8f9fa;
   --bs-dark: #212529;
-  --bs-primary-rgb: 30, 39, 61;
-  --bs-secondary-rgb: 44, 62, 80;
+  --bs-primary-rgb: 255,238,147;
+  --bs-secondary-rgb: 0,20,39;
   --bs-success-rgb: 25, 135, 84;
   --bs-info-rgb: 13, 202, 240;
   --bs-warning-rgb: 255, 193, 7;
   --bs-danger-rgb: 220, 53, 69;
   --bs-light-rgb: 248, 249, 250;
   --bs-dark-rgb: 33, 37, 41;
-  --bs-white-rgb: 255, 255, 255;
+  --bs-white-rgb: 3,25,38;
   --bs-black-rgb: 0, 0, 0;
   --bs-body-color-rgb: 33, 37, 41;
   --bs-body-bg-rgb: 255, 255, 255;
@@ -2237,13 +2237,13 @@ progress {
 }
 
 .btn-outline-primary {
-  color: #1abc9c;
-  border-color: #1abc9c;
+  color: #2d3142;
+  border-color: #2d3142;
 }
 .btn-outline-primary:hover {
   color: #fff;
-  background-color: #1abc9c;
-  border-color: #1abc9c;
+  background-color: #2d3142;
+  border-color: #2d3142;
 }
 .btn-check:focus + .btn-outline-primary, .btn-outline-primary:focus {
   box-shadow: 0 0 0 0.25rem rgba(26, 188, 156, 0.5);
@@ -5401,10 +5401,10 @@ progress {
 }
 
 .link-primary {
-  color: #1abc9c;
+  color: #FC814A;
 }
 .link-primary:hover, .link-primary:focus {
-  color: #15967d;
+  color: #FC814A;
 }
 
 .link-secondary {
@@ -10472,7 +10472,7 @@ html {
 }
 
 .copyright {
-  background-color: #1a252f;
+  background-color: #22333b;
 }
 
 
