@@ -14,38 +14,38 @@ def main():
     handler = ipinfo.getHandler(access_token)
     details = handler.getDetails()
 
-    def showISP():
+    def show_isp():
         return details.org[8:]
 
-    dataISP = showISP()
+    data_isp = show_isp()
 
-    def showISPCountry():
+    def show_isp_Country():
         return details.city
 
-    cityISP = showISPCountry()
+    city_isp = show_isp_Country()
 
-    def showISPCountry():
+    def show_isp_Country():
         return details.country_name
 
-    countryISP = showISPCountry()
+    country_isp = show_isp_Country()
 
-    def showIP():
+    def show_ip():
         return details.ip
 
-    showIP = showIP()
+    ip = show_ip()
 
     def showlanglong():
         return f"https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-l+ff0000({details.longitude},{details.latitude})/{details.longitude},{details.latitude},05.90,20,60/1000x400?access_token={map_img_token}"
 
     langlong = showlanglong()
 
-    def showISPregion():
+    def show_isp_region():
         return details.region
 
-    showregion = showISPregion()
+    show_region = show_isp_region()
 
     # To check whether the VPN is connected or not
-    def showStatus():
+    def show_status():
         host = details.ip
         ping = subprocess.Popen(["ping.exe", "-n", "1", "-w", "1", host], stdout=subprocess.PIPE).communicate()[0]
         if ('unreachable' in str(ping)) or ('timed' in str(ping)) or ('failure' in str(ping)):
@@ -58,14 +58,65 @@ def main():
         else:
             return "Unprotected"
 
-    showstatus = showStatus()
-    return render_template("index.html", yourISP=dataISP, city=cityISP, country=countryISP, ip=showIP,
-                           location=langlong, region=showregion, status=showstatus)
+    status = show_status()
+    return render_template("index.html", yourISP=data_isp, city=city_isp, country=country_isp, ip=ip,
+                           location=langlong, region=show_region, status=status)
 
 
-@app.route("/share")
-def share():
-    return "<h1>I am a sharer.</h1>"
+@app.route("/share/<ip>")
+def share(ip):
+    # print(ip)
+    # To return the whole page as main route
+    handler = ipinfo.getHandler(access_token)
+    details = handler.getDetails(ip)
+
+    def show_isp():
+        return details.org[8:]
+
+    data_isp = show_isp()
+
+    def show_isp_Country():
+        return details.city
+
+    city_isp = show_isp_Country()
+
+    def show_isp_Country():
+        return details.country_name
+
+    country_isp = show_isp_Country()
+
+    def show_ip():
+        return details.ip
+
+    ip = show_ip()
+
+    def showlanglong():
+        return f"https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-l+ff0000({details.longitude},{details.latitude})/{details.longitude},{details.latitude},05.90,20,60/1000x400?access_token={map_img_token}"
+
+    langlong = showlanglong()
+
+    def show_isp_region():
+        return details.region
+
+    show_region = show_isp_region()
+
+    # To check whether the VPN is connected or not
+    def show_status():
+        host = details.ip
+        ping = subprocess.Popen(["ping.exe", "-n", "1", "-w", "1", host], stdout=subprocess.PIPE).communicate()[0]
+        if ('unreachable' in str(ping)) or ('timed' in str(ping)) or ('failure' in str(ping)):
+            ping_chk = 0
+        else:
+            ping_chk = 1
+
+        if ping_chk == 1:
+            return "Protected"
+        else:
+            return "Unprotected"
+
+    status = show_status()
+    return render_template("shareip.html", yourISP=data_isp, city=city_isp, country=country_isp, ip=ip,
+                           location=langlong, region=show_region, status=status)
 
 
 if __name__ == '__main__':
