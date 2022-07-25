@@ -53,13 +53,15 @@
         <!--Find other IP Section-->
         <p class="masthead-subheading font-weight-light mb-2">Search for other ISPs</p>
         <p class="mb-3">Want to know ISP and location of other IP, then enter the IP below</p>
+        <form onsubmit="return findOtherIsp()">
         <div class="d-flex flex-column flex-lg-row justify-content-lg-center panel">
             <div class="input-group">
                 <input class="form-control" placeholder={{ip}}
-                       type="search"/>
-                <button class="btn btn-outline-primary" type="button"><i class="fa fa-search"></i> Find ISP</button>
+                       type="text" name="url" id="anotherIp"/>
+                <button class="btn btn-outline-primary" type="submit"><i class="fa fa-search"></i> Find ISP</button>
             </div>
         </div>
+            </form>
 
         <!--Share Report Section-->
         <p class="masthead-subheading font-weight-light mb-3 mt-5">Share your Report</p>
