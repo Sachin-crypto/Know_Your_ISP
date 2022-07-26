@@ -50,8 +50,7 @@ function findOtherIsp() {
       var e = document.getElementById('anotherIp');
       var ip = e.value;
       if (ip === "") {
-          e.classList.add("border border-danger");
-//          e.classList.remove("border-gray-300");
+          e.classList.add("border-danger");
       } else {
           window.location = '/share/' + ip;
       }
