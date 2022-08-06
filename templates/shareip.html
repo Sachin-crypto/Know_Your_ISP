@@ -1,5 +1,14 @@
 {% extends 'layout.html' %}
-{% block body %}
+
+{% block title%}
+Share Your ISP - Share your ISP report
+{% endblock %}
+
+{% block ipsection %}
+<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded">Your IP: {{ip}}</a></li>
+{% endblock%}
+
+{% block content %}
 <!-- Masthead-->
 <header class="masthead bg-primary text-white text-center">
     <div class="container d-flex align-items-center flex-column">
@@ -54,27 +63,50 @@
         <p class="masthead-subheading font-weight-light mb-2">Search for other ISPs</p>
         <p class="mb-3">Want to know ISP and location of other IP, then enter the IP below</p>
         <form onsubmit="return findOtherIsp()">
-        <div class="d-flex flex-column flex-lg-row justify-content-lg-center panel">
-            <div class="input-group">
-                <input class="form-control" placeholder={{ip}}
-                       type="text" name="url" id="anotherIp"/>
-                <button class="btn btn-outline-primary" type="submit"><i class="fa fa-search"></i> Find ISP</button>
+            <div class="d-flex flex-column flex-lg-row justify-content-lg-center panel">
+                <div class="input-group">
+                    <input class="form-control" id="anotherIp"
+                           name="url" placeholder={{ip}} type="text"/>
+                    <button class="btn btn-outline-primary" type="submit"><i class="fa fa-search"></i> Find ISP</button>
+                </div>
             </div>
-        </div>
-            </form>
+        </form>
 
         <!--Share Report Section-->
         <p class="masthead-subheading font-weight-light mb-3 mt-5">Share your Report</p>
         <form onsubmit="document.getElementById('sharer').select();document.execCommand('copy');return false;">
-        <div class="d-flex flex-column flex-lg-row justify-content-lg-center panel">
-            <div class="input-group">
-                <input value="http://127.0.0.1:5000/share/{{ip}}" class="form-control" name="url" id="sharer" type="text"/>
-                <button class="btn btn-outline-primary" type="submit"><i class="fa fa-clipboard"></i> Copy link</button>
+            <div class="d-flex flex-column flex-lg-row justify-content-lg-center panel">
+                <div class="input-group">
+                    <input class="form-control" id="sharer" name="url" type="text"
+                           value="http://127.0.0.1:5000/share/{{ip}}"/>
+                    <button class="btn btn-outline-primary" type="submit"><i class="fa fa-clipboard"></i> Copy link
+                    </button>
+                </div>
             </div>
-        </div>
-            </form>
+        </form>
     </div>
 
 
 </header>
+{% endblock %}
+
+{% block info%}
+<!-- About Section Content-->
+<section class="bg-primary text-white mb-0">
+    <div class="container">
+        <!-- About Section Content-->
+        <div class="row">
+            <div class="col-lg-4 ms-auto mb-3"><p class="h5 link-primary">What is an ISP?</p>
+                <p class="lead">ISP stands for <b>Internet Service Provider</b>. An Internet service provider (ISP) is
+                    an organization that provides services for accessing, using, or participating in the Internet.</p>
+            </div>
+            <div class="col-lg-4 me-auto mb-3"><p class="h5 link-primary">IP address</p>
+                <p class="lead">Your external IP address is {{ip}} which is an unique address that is used to identify
+                    your internet connection.</p></div>
+            <div class="col-lg-4 me-auto mb-5"><p class="h5 link-primary">You're {{status}}</p>
+                <p class="lead">Your data is vulnerable and you could be spied on by hackers or worse
+                    you could get hacked. So protect yourself by using a VPN.</p></div>
+        </div>
+    </div>
+</section>
 {% endblock %}

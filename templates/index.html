@@ -1,5 +1,14 @@
 {% extends 'layout.html' %}
-{% block body %}
+
+{% block title%}
+Know Your ISP - Find your Internet Service Provider
+{% endblock %}
+
+{% block ipsection %}
+<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded">Your IP: {{ip}}</a></li>
+{% endblock%}
+
+{% block content %}
 <!-- Masthead-->
 <header class="masthead bg-primary text-white text-center">
     <div class="container d-flex align-items-center flex-column">
@@ -77,4 +86,25 @@
 
 
 </header>
+{% endblock %}
+
+{% block info%}
+<!-- About Section Content-->
+<section class="bg-primary text-white mb-0">
+    <div class="container">
+        <!-- About Section Content-->
+        <div class="row">
+            <div class="col-lg-4 ms-auto mb-3"><p class="h5 link-primary">What is an ISP?</p>
+                <p class="lead">ISP stands for <b>Internet Service Provider</b>. An Internet service provider (ISP) is
+                    an organization that provides services for accessing, using, or participating in the Internet.</p>
+            </div>
+            <div class="col-lg-4 me-auto mb-3"><p class="h5 link-primary">IP address</p>
+                <p class="lead">Your external IP address is {{ip}} which is an unique address that is used to identify
+                    your internet connection.</p></div>
+            <div class="col-lg-4 me-auto mb-5"><p class="h5 link-primary">You're {{status}}</p>
+                <p class="lead">Your data is vulnerable and you could be spied on by hackers or worse
+                    you could get hacked. So protect yourself by using a VPN.</p></div>
+        </div>
+    </div>
+</section>
 {% endblock %}
