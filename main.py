@@ -14,35 +14,12 @@ def main():
     handler = ipinfo.getHandler(access_token)
     details = handler.getDetails()
 
-    def show_isp():
-        return details.org[8:]
-
-    data_isp = show_isp()
-
-    def show_isp_Country():
-        return details.city
-
-    city_isp = show_isp_Country()
-
-    def show_isp_Country():
-        return details.country_name
-
-    country_isp = show_isp_Country()
-
-    def show_ip():
-        return details.ip
-
-    ip = show_ip()
-
-    def showlanglong():
-        return f"https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-l+ff0000({details.longitude},{details.latitude})/{details.longitude},{details.latitude},05.90,20,60/1000x400?access_token={map_img_token}"
-
-    langlong = showlanglong()
-
-    def show_isp_region():
-        return details.region
-
-    show_region = show_isp_region()
+    data_isp = details.org[8:]
+    city_isp = details.city
+    country_isp = details.country_name
+    ip = details.ip
+    langlong = f"https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-l+ff0000({details.longitude},{details.latitude})/{details.longitude},{details.latitude},05.90,20,60/1000x400?access_token={map_img_token}"
+    show_region = details.region
 
     # To check whether the VPN is connected or not
     def show_status():
@@ -59,8 +36,9 @@ def main():
             return "Unprotected"
 
     status = show_status()
-    return render_template("index.html", yourISP=data_isp, city=city_isp, country=country_isp, ip=ip,
-                           location=langlong, region=show_region, status=status)
+
+    return render_template("index.html", yourISP=data_isp, city=city_isp, country=country_isp, ip=ip, location=langlong,
+                           region=show_region, status=status)
 
 
 @app.route("/share/<ip>")
@@ -68,37 +46,14 @@ def share(ip):
     try:
         # print(ip)
         handler = ipinfo.getHandler(access_token)
-        details = handler.getDetails(ip)
+        details = handler.getDetails()
 
-        def show_isp():
-            return details.org[8:]
-
-        data_isp = show_isp()
-
-        def show_isp_Country():
-            return details.city
-
-        city_isp = show_isp_Country()
-
-        def show_isp_Country():
-            return details.country_name
-
-        country_isp = show_isp_Country()
-
-        def show_ip():
-            return details.ip
-
-        ip = show_ip()
-
-        def showlanglong():
-            return f"https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-l+ff0000({details.longitude},{details.latitude})/{details.longitude},{details.latitude},05.90,20,60/1000x400?access_token={map_img_token}"
-
-        langlong = showlanglong()
-
-        def show_isp_region():
-            return details.region
-
-        show_region = show_isp_region()
+        data_isp = details.org[8:]
+        city_isp = details.city
+        country_isp = details.country_name
+        ip = details.ip
+        langlong = f"https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-l+ff0000({details.longitude},{details.latitude})/{details.longitude},{details.latitude},05.90,20,60/1000x400?access_token={map_img_token}"
+        region = details.region
 
         # To check whether the VPN is connected or not
         def show_status():
@@ -115,8 +70,9 @@ def share(ip):
                 return "Unprotected"
 
         status = show_status()
-        return render_template("shareip.html", yourISP=data_isp, city=city_isp, country=country_isp, ip=ip,
-                               location=langlong, region=show_region, status=status)
+
+        return render_template("index.html", yourISP=data_isp, city=city_isp, country=country_isp, ip=ip,
+                               location=langlong, region=region, status=status)
 
     except:
         return render_template("404.html")
