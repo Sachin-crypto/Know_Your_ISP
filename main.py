@@ -89,7 +89,7 @@ def main():
                 'country': details.country_name,
                 'location': f"https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-l+ff0000({details.longitude},{details.latitude})/{details.longitude},{details.latitude},05.90,20,60/1000x400?access_token={map_img_token}"
             }
-
+            global dc_id
             response = databases.create_document(
                 database_id=db_id,
                 document_id=dc_id,
@@ -109,7 +109,7 @@ def main():
 @app.route("/share/<ip>")
 def share(ip):
     handler = ipinfo.getHandler(access_token)
-    details = handler.getDetails()
+    details = handler.getDetails(ip)
 
     # To check whether the VPN is connected or not
     def show_status():
@@ -137,11 +137,12 @@ def share(ip):
                 Query.search("ip", ip)  # 1st arg - attribute name and 2nd arg - Query to search
             ]
         )
+        print("Entry ", entry)
 
         # If found any data then fetch from db and render
         if entry['documents']:
             data = entry['documents'][0]
-            return render_template("index.html", yourISP=data['isp'].strip(), city=data['city'],
+            return render_template("shareip.html", yourISP=data['isp'].strip(), city=data['city'],
                                    country=data['country'], ip=data['ip'], location=data['location'],
                                    region=data['region'], status=status)
 
@@ -164,13 +165,54 @@ def share(ip):
                 data=data,
 
             )
+            print("Response: ", response)
 
-            return render_template("index.html", yourISP=response['isp'].strip(), city=response['city'],
+            return render_template("shareip.html", yourISP=response['isp'].strip(), city=response['city'],
                                    country=response['country'], ip=response['ip'], location=response['location'],
                                    region=response['region'], status=status)
 
     # If other exception occurs render error page
     except:
+        return render_template("404.html")
+
+
+@app.route("/search/<ipaddr>")
+def search_ip(ipaddr):
+    handler = ipinfo.getHandler(access_token)
+    details = handler.getDetails(ipaddr)
+
+    try:
+        # To check whether the VPN is connected or not
+        def show_status():
+            host = details.ip
+            ping = subprocess.Popen(["ping.exe", "-n", "1", "-w", "1", host], stdout=subprocess.PIPE).communicate()[0]
+            if ('unreachable' in str(ping)) or ('timed' in str(ping)) or ('failure' in str(ping)):
+                ping_chk = 0
+            else:
+                ping_chk = 1
+
+            if ping_chk == 1:
+                return "Protected"
+            else:
+                return "Unprotected"
+
+        status = show_status()
+        # Check if 'org' attribute exists
+        if hasattr(details, 'org'):
+            isp = details.org[8:].strip()  # Strip the first 8 characters
+        else:
+            isp = "Unknown ISP"
+
+        # Location of ISP
+        location = f"https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-l+ff0000({details.longitude},{details.latitude})/{details.longitude},{details.latitude},05.90,20,60/1000x400?access_token={map_img_token}"
+
+        # Render the template
+        return render_template("shareip.html", yourISP=isp, city=details.city,
+                               country=details.country_name, ip=details.ip, location=location,
+                               region=details.region, status=status)
+
+    # If other exception occurs render error page
+    except ConnectionError as e:
         return render_template("404.html")
 
 
