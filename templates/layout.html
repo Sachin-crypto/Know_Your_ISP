@@ -22,6 +22,12 @@
 <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top" id="mainNav">
     <div class="container">
         <a class="navbar-brand fw-bold fs-3 text-info" href="/">knowyourISP</a>
+
+        <!-- Search form  -->
+        <form class="d-flex" method="POST" action="/search">
+      <input class="form-control me-2" name="ipaddr" type="search" placeholder="Search ISP" aria-label="Search">
+      <button class="btn btn-outline-info" type="submit">Search</button>
+    </form>
         <button aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation"
                 class="navbar-toggler bg-dark rounded"
@@ -29,11 +35,6 @@
                 data-bs-toggle="collapse" type="button">
             <i class="fas fa-bars"></i>
         </button>
-        <!-- Search form  -->
-        <form class="d-flex" method="POST" action="/search">
-      <input class="form-control me-2" name="ipaddr" type="search" placeholder="Search ISP" aria-label="Search">
-      <button class="btn btn-outline-info" type="submit">Search</button>
-    </form>
 
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto">
