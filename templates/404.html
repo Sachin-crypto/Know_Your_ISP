@@ -5,12 +5,12 @@ Page Not Found - Not a page you are looking for
 {% endblock %}
 
 {% block content %}
-<header class="masthead bg-primary text-white text-center">
-    <div class="container d-flex align-items-center flex-column">
+<header class="bg-light text-dark text-center py-5">
+    <div class="container d-flex align-items-center flex-column mt-5">
         <img src="{{url_for('static', filename='assets/img/error-404.png')}}" class="img-fluid" alt="Page Not Found">
-        <h1 class="masthead-heading text-uppercase mb-0">Oops!</h1>
+        <h1 class="text-uppercase mb-0">Oops!</h1>
         <h3 class="my-4">Not a page you are looking for...</h3>
-        <a href="{{ url_for('main') }}"><h3>Hit Me</h3></a>
+        <a href="{{ url_for('home.main') }}"><h3>Hit Me</h3></a>
     </div>
 </header>
 {% endblock %}

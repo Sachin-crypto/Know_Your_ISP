@@ -5,83 +5,59 @@ Know Your ISP - Find your Internet Service Provider
 {% endblock %}
 
 {% block ipsection %}
-<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded">Your IP: {{ip}}</a></li>
+<li class="py-3 mx-lg-1 text-light">Your IP: {{ip}}</li>
 {% endblock%}
 
 {% block content %}
-<!-- Masthead-->
-<header class="masthead bg-primary text-white text-center">
+<header class="bg-light text-dark text-center mt-5">
     <div class="container d-flex align-items-center flex-column">
 
         <!--ISP Section-->
-        <h3 class=" mb-4">Your ISP is</h3>
+        <p class="mt-5 mb-0 fw-bold">Your ISP is</p>
         <h1 class="masthead-heading text-uppercase mb-0">{{ yourISP }}</h1>
-
-        <!-- Icon Divider-->
-        <div class="divider-custom divider-light">
-            <div class="divider-custom-line"></div>
-            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-            <div class="divider-custom-line"></div>
-        </div>
 
         <!-- IP-->
         <div class="p-4">
-            <p class="masthead-subheading font-weight-light mb-0">Your IP</p>
-            <h1 class=" mb-4">{{ip}}</h1>
+            <p class="mb-0">Your IP</p>
+            <h2 class="mb-0">{{ip}}</h2>
         </div>
 
         <!-- City-->
         <div class="d-flex flex-column flex-lg-row justify-content-lg-center panel">
             <div class="p-4">
-                <p class="masthead-subheading font-weight-light mb-0">City</p>
-                <h1 class=" mb-4">{{city}}</h1>
+                <p class="mb-0">City</p>
+                <h3 class=" mb-4">{{city}}</h3>
             </div>
 
             <!-- Region-->
             <div class="p-4">
-                <p class="masthead-subheading font-weight-light mb-0">Region</p>
-                <h1 class=" mb-4">{{region}}</h1>
+                <p class="mb-0">Region</p>
+                <h3 class=" mb-4">{{region}}</h3>
             </div>
 
             <!-- Country-->
             <div class="p-4">
-                <p class="masthead-subheading font-weight-light mb-0">Country</p>
-                <h1 class=" mb-4">{{country}}</h1>
+                <p class="mb-0">Country</p>
+                <h3 class=" mb-4">{{country}}</h3>
             </div>
         </div>
 
         <!--Location Section-->
-        <p class="masthead-subheading font-weight-light mb-0">Approximate Location</p>
+        <p class="mb-0">Approximate Location</p>
         <img alt="Your ISP location" class="img-fluid rounded mt-3" src={{location}}>
-        <div class="divider-custom divider-light">
-            <div class="divider-custom-line"></div>
-            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-            <div class="divider-custom-line"></div>
-        </div>
-
-        <!--Find other IP Section-->
-        <p class="masthead-subheading font-weight-light mb-2">Search for other ISPs</p>
-        <p class="mb-3">Want to know ISP and location of other IP, then enter the IP below</p>
-        <form onsubmit="return findOtherIsp()">
-        <div class="d-flex flex-column flex-lg-row justify-content-lg-center panel">
-            <div class="input-group">
-                <input class="form-control" placeholder={{ip}}
-                       type="text" name="url" id="anotherIp"/>
-                <button class="btn btn-outline-primary" type="submit"><i class="fa fa-search"></i> Find ISP</button>
-            </div>
-        </div>
-            </form>
 
         <!--Share Report Section-->
-        <p class="masthead-subheading font-weight-light mb-3 mt-5">Share your Report</p>
+        <p class="mb-3 mt-5">Share your Report</p>
         <form onsubmit="document.getElementById('sharer').select();document.execCommand('copy');return false;">
-        <div class="d-flex flex-column flex-lg-row justify-content-lg-center panel">
-            <div class="input-group">
-                <input value="http://127.0.0.1:5000/share/{{ip}}" class="form-control" name="url" id="sharer" type="text"/>
-                <button class="btn btn-outline-primary" type="submit"><i class="fa fa-clipboard"></i> Copy link</button>
+            <div class="d-flex flex-column flex-lg-row justify-content-lg-center panel mb-5">
+                <div class="input-group">
+                    <input value="http://127.0.0.1:5000/share/{{ip}}" class="form-control" name="url" id="sharer"
+                           type="text"/>
+                    <button class="btn btn-outline-info" type="submit"><i class="fa fa-clipboard"></i> Copy link
+                    </button>
+                </div>
             </div>
-        </div>
-            </form>
+        </form>
     </div>
 
 
@@ -89,28 +65,34 @@ Know Your ISP - Find your Internet Service Provider
 {% endblock %}
 
 {% block info%}
-<!-- About Section Content-->
-<section class="bg-primary text-white mb-0">
+<!-- Info Section Content-->
+<section class="bg-light text-dark mb-0">
     <div class="container">
-        <!-- About Section Content-->
+        <!-- Info Section Content-->
         <div class="row">
-            <div class="col-lg-4 ms-auto mb-3"><p class="h5 link-primary">What is an ISP?</p>
-                <p class="lead">ISP stands for <b>Internet Service Provider</b>. An Internet service provider (ISP) is
+            <div class="col-lg-4 ms-auto mb-3"><p class="h5 text-dark">What is an ISP?</p>
+                <p>ISP stands for <b>Internet Service Provider</b>. An Internet service provider (ISP) is
                     an organization that provides services for accessing, using, or participating in the Internet.</p>
             </div>
-            <div class="col-lg-4 me-auto mb-3"><p class="h5 link-primary">IP address</p>
-                <p class="lead">Your external IP address is {{ip}} which is an unique address that is used to identify
+            <div class="col-lg-4 me-auto mb-3"><p class="h5 text-dark">IP address</p>
+                <p>Your external IP address is <b>{{ip}}</b> which is an unique address that is used to identify
                     your internet connection.</p></div>
             {% if status == 'unprotected' %}
-            <div class="col-lg-4 me-auto mb-5"><p class="h5 link-primary">You're {{status}}</p>
-                <p class="lead">Without using a VPN, your data is at risk of being compromised. Hackers can intercept your sensitive information, such as passwords and financial details, while your online activities can be monitored and tracked by third parties. This lack of encryption leaves your data vulnerable to unauthorized access and potential privacy breaches. So protect yourself by using a VPN.</p></div>
+            <div class="col-lg-4 me-auto mb-5"><p class="h5 text-success">You're {{status}}</p>
+                <p>Without using a VPN, your data is at risk of being compromised. Hackers can intercept your sensitive
+                    information, such as passwords and financial details, while your online activities can be monitored
+                    and tracked by third parties. This lack of encryption leaves your data vulnerable to unauthorized
+                    access and potential privacy breaches. So protect yourself by using a VPN.</p></div>
             {% else %}
-            <div class="col-lg-4 me-auto mb-5"><p class="h5 link-primary">You're {{status}}</p>
-                <p class="lead">Using a VPN ensures the safety of your data by encrypting your internet connection. It protects your sensitive information from hackers, safeguards your privacy by hiding your IP address, and prevents unauthorized access, ensuring your data remains secure and confidential.</p></div>
+            <div class="col-lg-4 me-auto mb-5"><p class="h5 text-danger">You're {{status}}</p>
+                <p>Using a VPN ensures the safety of your data by encrypting your internet connection. It protects your
+                    sensitive information from hackers, safeguards your privacy by hiding your IP address, and prevents
+                    unauthorized access, ensuring your data remains secure and confidential.</p></div>
             {% endif %}
 
         </div>
 
     </div>
 </section>
+
 {% endblock %}
